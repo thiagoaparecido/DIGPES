@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DIGPES.Models.Avaliacao>
+
+@{
+    ViewBag.Title = "Pesquisas Realizadas";
+}
+
+<br />
+@*<h3>Pesquisas Realizadas</h3>*@
+
+@*<table width="100%">
+        <tr>
+            <td><a href="~/Avaliacao/Filter" class="btn btn-primary btn-sm btn">Preencher Questionário</a></td>
+            <td style="text-align:right"><button id="btnGrafico" class="btn btn-success btn btn-sm">Gráfico - Possui Produto</button></td>
+        </tr>
+    </table>*@
+
+
+
+
+@Html.Partial("_View")
+<br />
+
+<div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalQuestaoA" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalQuestaoA">Questão A</h5>
+            </div>
+            <div class="modal-body text-center">
+                <p><b>Questão A - Cliente ainda possui o produto ?</b></p>
+                <div id="chart_div" style="text-align:center; display: inline-block; margin: 0 auto"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#btnGrafico').click(function () {
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(drawChart);
+            });
+        });
+
+        //var data;
+        var chart;
+
+        var qtdASim = Number($('#qtdASim').val());
+        var qtdANao = Number($('#qtdANao').val());
+
+        function drawChart() {
+
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Resposta');
+            data.addColumn('number', 'QuestaoA');
+
+            data.addRows([
+                ['Não', qtdANao],
+                ['Sim', qtdASim]
+            ]);
+
+            // Set chart options
+            var options = {
+                'title': ''
+            };
+
+            chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            $('#exampleModalCenter').modal('show');
+        }
+    </script>
+}

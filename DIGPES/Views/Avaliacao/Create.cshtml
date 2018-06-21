@@ -1,0 +1,252 @@
+﻿@model IEnumerable<DIGPES.Models.Avaliacao>
+
+@{
+    ViewBag.Title = "Pesquisa de Satisfação";
+}
+
+<style>
+    body {
+        background-color: lightblue;
+    }
+
+    .background-table {
+        background-color: white
+    }
+</style>
+
+<br />
+<h2>Pesquisa de Satisfação</h2>
+<hr />
+
+@using (Html.BeginForm("Answer", "Avaliacao", FormMethod.Post, htmlAttributes: new { id = "frmPesquisa" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="table-responsive col-md-10">
+        <table class="table small table-bordered">
+            <thead>
+                <tr style="background-color:darkslategrey;color:white">
+                    <th>
+                        OS
+                    </th>
+                    <th>
+                        Produto
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Data
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="background-table">
+                <tr>
+                    <td scope="row">@ViewBag.OrdemServico</td>
+                    <td scope="row">@ViewBag.Produto</td>
+                    <td scope="row">@ViewBag.Nome</td>
+                    <td scope="row">@ViewBag.Data.ToShortDateString()</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div hidden="hidden">
+        <input type="text" id="OrdemServico" name="OrdemServico" value="@ViewBag.OrdemServico" />
+        <input type="text" id="Produto" name="Produto" value="@ViewBag.Produto" />
+        <input type="text" id="Nome" name="Nome" value="@ViewBag.Nome" />
+        <input type="text" id="Data" name="Data" value="@ViewBag.Data.ToShortDateString()" />
+    </div>
+
+    <br />
+
+    <div class="form-horizontal">
+        <p>Por favor, responda as perguntas desta pesquisa com base somente no serviço realizado no <b>produto que consta da linha acima</b>.</p>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <table border="0" style="width:100%" class=" input-sm">
+            <tr>
+                <td>
+                    <label class="control-label">A) O Sr(a) ainda possui o produto mencionado acima ?</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="QuestaoA" name="QuestaoA">
+                            <option value="1">Sim</option>
+                            <option value="0">Não</option>
+                        </select>
+                    </div>
+                    <br />
+                    @*@Html.ValidationMessageFor(model => model.QuestaoA, "", new { @class = "text-danger" })*@
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label">B)	Para que tipo de serviço você solicitou assistência técnica:</label>
+
+                    <select class="form-control" id="QuestaoB" name="QuestaoB">
+                        <option value="Instalação do produto">Instalação do produto</option>
+                        <option value="Orientações sobre o uso">Orientações sobre o uso</option>
+                        <option value="Conserto do produto">Conserto do produto</option>
+                    </select>
+                    <br />
+                    @*@Html.ValidationMessageFor(model => model.QuestaoB, "", new { @class = "text-danger" })*@
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label">C)	Como você localizou o telefone do Serviço Autorizado?</label>
+
+                    <select multiple class="form-control" id="QuestaoC" name="QuestaoC">
+                        <option value="Lista telefônica">Lista telefônica</option>
+                        <option value="Viu na rua">Viu na rua</option>
+                        <option value="Linha 0800">Linha 0800</option>
+                        <option value="Manual do produto">Manual do produto</option>
+                        <option value="Indicação de conhecidos">Indicação de conhecidos</option>
+                    </select>
+                    <br />
+                    @*@Html.ValidationMessageFor(model => model.QuestaoC, "", new { @class = "text-danger" })*@
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label">D) Baseado no atendimento recebido pelo pessoal do Serviço Autorizado, o Sr(a) diria que está:</label>
+
+                    <select class="form-control" id="QuestaoD" name="QuestaoD">
+                        <option value="" selected></option>
+                        <option value="Muito Satisfeito">Muito Satisfeito</option>
+                        <option value="Satisfeito">Satisfeito</option>
+                        <option value="Razoavelmente Satisfeito">Razoavelmente Satisfeito</option>
+                        <option value="Insatisfeito">Insatisfeito</option>
+                        <option value="Muito Insatisfeito">Muito Insatisfeito</option>
+                    </select>
+                    @*@Html.ValidationMessageFor(model => model.QuestaoD, "", new { @class = "text-danger" })*@
+                </td>
+                <td></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <br />
+                    <table border="0" width="80%">
+                        <tr>
+                            <td align="left" style="width:10%"></td>
+                            <td align="left">
+                                <label class="control-label">Porquê ?:</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="width:10%"></td>
+                            <td align="right">
+                                <table border="0" style="width:100%">
+                                    <tr>
+                                        <td align="right">
+                                            <textarea maxlength="255" rows="4" id="MotivoQuestaoD" name="MotivoQuestaoD" value="" maxlength="255" class="form-control" style="max-width:inherit"></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+
+                        </tr>
+                    </table>
+            </tr>
+
+            <tr>
+                <td>
+                    <br />
+                    <label class="control-label">E)	Você recomendaria os nossos produtos para alguém?</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="QuestaoE" name="QuestaoE">
+                            <option value="1">Sim</option>
+                            <option value="0">Não</option>
+                        </select>
+                        <br />
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="~/Avaliacao/Filter" class="btn btn-info btn-sm">Voltar ao inicio</a>
+                </td>
+                <td></td>
+                <td>
+                    <a href="#" id="btnProximo" name="btnProximo" class="btn btn-success btn-sm pull-right" onclick="$('#frmPesquisa').submit();">Próximo</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+}
+
+<br />
+@Html.Partial("_View")
+<br />
+
+<div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalQuestaoA" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalQuestaoA">Questão A</h5>
+            </div>
+            <div class="modal-body text-center">
+                <p><b>Questão A - Cliente ainda possui o produto ?</b></p>
+                <div id="chart_div" style="text-align:center; display: inline-block; margin: 0 auto"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+        $('#btnGrafico').click(function () {
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+            });
+        });
+
+        //var data;
+        var chart;
+
+        var qtdASim = Number($('#qtdASim').val());
+        var qtdANao = Number($('#qtdANao').val());
+
+        function drawChart() {
+
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Resposta');
+            data.addColumn('number', 'QuestaoA');
+
+            data.addRows([
+                ['Não', qtdANao],
+                ['Sim', qtdASim]
+            ]);
+
+            // Set chart options
+            var options = {
+                'title': ''
+            };
+
+            chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            $('#exampleModalCenter').modal('show');
+        }
+    </script>
+}

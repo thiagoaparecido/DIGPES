@@ -1,0 +1,120 @@
+﻿@model IEnumerable<DIGPES.Models.Avaliacao>
+
+<table width="100%">
+    <tr>
+        <td>
+            <h4>Pesquisas Realizadas</h4>
+        </td>
+        <td style="text-align:right">
+            <button id="btnGrafico" class="btn btn-success btn btn-sm">Gráfico - Possui Produto</button>
+        </td>
+    </tr>
+</table>
+
+
+<div class="table-responsive">
+    <table class="table small table-wrapper background-table">
+        <thead style="background-color:black;color:white">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrdemServico)
+                </th>
+                <th width="110px">
+                    @Html.DisplayNameFor(model => model.Produto)
+                </th>
+                <th width="110px">
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th width="150px">
+                    @Html.DisplayNameFor(model => model.QuestaoA)
+                </th>
+                <th width="150px">
+                    @Html.DisplayNameFor(model => model.QuestaoB)
+                </th>
+                <th width="150px">
+                    @Html.DisplayNameFor(model => model.QuestaoC)
+                </th>
+                <th width="150px">
+                    @Html.DisplayNameFor(model => model.QuestaoD)
+                </th>
+                <th width="400px">
+                    @Html.DisplayNameFor(model => model.MotivoQuestaoD)
+                </th>
+                <th width="150px">
+                    @Html.DisplayNameFor(model => model.QuestaoE)
+                </th>
+            </tr>
+        </thead>
+
+        @{
+            var qtdSim = 0;
+            var qtdNao = 0;
+        }
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+
+
+                if (item.QuestaoA == DIGPES.Models.Enum.EnumRespostas.Sim)
+                {
+                    qtdSim = qtdSim + 1;
+                }
+
+                if (item.QuestaoA == DIGPES.Models.Enum.EnumRespostas.Nao)
+                {
+                    qtdNao = qtdNao + 1;
+                }
+
+
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrdemServico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestaoA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestaoB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestaoC)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestaoD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MotivoQuestaoD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestaoE)
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <div hidden="hidden">
+        <input type="text" id="qtdASim" name="qtdASim" value="@qtdSim" />
+        <input type="text" id="qtdANao" name="qtdANao" value="@qtdNao" />
+
+    </div>
+</div>
+
+
+

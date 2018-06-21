@@ -1,0 +1,107 @@
+﻿@model DIGPES.Models.Avaliacao
+
+@{
+    ViewBag.Title = "Pesquisa de Satisfação";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<br />
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <table class="table small" border="0" style="width:80%">
+        <thead>
+            <tr style="background-color:black;color:white">
+                <th colspan="4" style="text-align:center">
+                    PESQUISA DE SATISFAÇÃO
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width:2%; padding-left:0">
+                    @Html.LabelFor(model => model.OrdemServico, htmlAttributes: new { @class = "control-label" })
+                </td>
+                <td style="padding-left:0">
+                    @Html.EditorFor(model => model.OrdemServico, new { htmlAttributes = new { @class = "form-control  form-control-sm", style="width:20%", maxlength = "15", min = "1" } })
+                    @Html.ValidationMessageFor(model => model.OrdemServico, "", new { @class = "text-danger" })
+
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="padding-left:0">
+                    @Html.LabelFor(model => model.Produto, htmlAttributes: new { @class = "control-label" })
+                </td>
+                <td style="padding-left:0">
+                    @Html.EditorFor(model => model.Produto, new { htmlAttributes = new { @class = "form-control form-control-sm", style = "width:100%", maxlength = "20" } })
+                    @Html.ValidationMessageFor(model => model.Produto, "", new { @class = "text-danger" })
+
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td style="padding-left:0">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+                </td>
+                <td style="padding-left:0">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control form-control-sm", maxlength = "50" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+
+                </td>
+                <td style="padding-left:0">
+                    @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label", maxlength = "10" })
+                </td>
+                <td style="padding-left:0">
+                    <div class="col-sm-5">
+                        <input name="Data" class="form-control form-control-sm text-box single-line" id="Data" type="text" style="text-align:center" autocomplete="off" maxlength="10" value="@DateTime.Today.ToShortDateString()">
+                        @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="~/Home" class="btn btn-info btn-sm">Voltar ao inicio</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td style="text-align:right">
+                    <input type="submit" value="Próximo" class="btn btn-success btn-sm pull-right" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#Data').datepicker({
+                dateFormat: "dd/mm/yy",
+                showStatus: true,
+                showWeek: true,
+                showOtherMonths: false,
+                selectOtherMonths: true,
+                autoSize: true,
+                gotoCurrent: true,
+                highlightWeek: true,
+            });
+        });
+
+    </script>
+}

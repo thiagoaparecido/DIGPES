@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIGPES", "DIGPES\DIGPES.csproj", "{F79EC34C-6CA5-433D-855E-5B80DEB6FB5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F79EC34C-6CA5-433D-855E-5B80DEB6FB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F79EC34C-6CA5-433D-855E-5B80DEB6FB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F79EC34C-6CA5-433D-855E-5B80DEB6FB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F79EC34C-6CA5-433D-855E-5B80DEB6FB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DEC10A9-791B-4FCC-87C0-7CDD00B7F7B2}
+	EndGlobalSection
+EndGlobal
